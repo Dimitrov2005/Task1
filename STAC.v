@@ -12,13 +12,16 @@ module STAC (input
    wire 	    CaptureIR;
    wire 	    ShiftIR;
    wire 	    UpdateIR;
-		 
+   wire 	    CaptureDR_neg;
+   wire 	    ShiftDR_neg;
+   wire 	    CaptureIR_neg;
+   wire 	    ShiftIR_neg;
    wire 	    en1;
    wire 	    en2;
    wire 	    si1_mux;
    wire 	    si2_mux;
    wire [7:0] 	    ir_po;
-
+   
 	
    fsm fsm(.TMS(TMS),
 	   .TDI(WSI),
@@ -29,7 +32,11 @@ module STAC (input
 	   .UpdateDR(UpdateDR),
 	   .CaptureIR(CaptureIR),
 	   .ShiftIR(ShiftIR),
-	   .UpdateIR(UpdateIR)
+	   .UpdateIR(UpdateIR),
+	   .CaptureDR_neg(CaptureDR_neg),
+	   .ShiftDR_neg(ShiftDR_neg),
+	   .CaptureIR_neg(CaptureIR_neg),
+	   .ShiftIR_neg(ShiftIR_neg)
 	   );
 
    dec dec1(.x(ir_po),
@@ -44,8 +51,8 @@ module STAC (input
 	     .WSO(WSO)
 	     );
   
-   IR ir1( .CaptureIR(CaptureIR),
-	   .ShiftIR(ShiftIR),
+   IR ir1( .CaptureIR(CaptureIR_neg),
+	   .ShiftIR(ShiftIR_neg),
 	   .UpdateIR(UpdateIR), 
 	   .TRESETN(TRESETN),
 	   .TCLK(TCLK),          
@@ -53,8 +60,8 @@ module STAC (input
 	   .PO(ir_po)
 	   );
    
-   TDR #(17,45)tdr1(.CaptureDR(CaptureDR), //turn 45 to hexadecimal
-	.ShiftDR(ShiftDR),
+   TDRRW tdr1(.CaptureDR(CaptureDR_neg),
+	.ShiftDR(ShiftDR_neg),
 	.UpdateDR(UpdateDR),
 	.Enable(en1),
 	.TRESETN(TRESETN),
@@ -63,13 +70,14 @@ module STAC (input
 	.SO(si1_mux)
 	);
    
-   TDR #(33,77) tdr2(.CaptureDR(CaptureDR), // turn 77 to hexadecimal
-	.ShiftDR(ShiftDR),
+   TDRR  tdr2(.CaptureDR(CaptureDR_neg), 
+	.ShiftDR(ShiftDR_neg),
 	.UpdateDR(UpdateDR),
 	.Enable(en2),
 	.TRESETN(TRESETN),
 	.TCLK(TCLK), 
 	.SI(WSI),
+	.PI(33'hca),// connect to constant 
 	.SO(si2_mux)
 	);
 

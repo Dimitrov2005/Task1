@@ -21,7 +21,7 @@ class Scoreboard extends uvm_scoreboard;
 	begin
 	   tr=new("tr");
 	   fifo.get(tr);
-	   `uvm_info("TRREC",$sformatf("+++++++ Transaction recieved  TMS: %b WSI: %h WSO %h ++++++",tr.TMS,tr.WSI,tr.WSO), UVM_MEDIUM);
+	  // `uvm_info("TRREC",$sformatf("+++++++ Transaction recieved   WSI: %h WSO %h ++++++",tr.WSI,tr.WSO), UVM_MEDIUM);
 	end
    endtask // run
 endclass // Scoreboard

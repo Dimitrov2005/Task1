@@ -10,7 +10,11 @@ module fsm (
 	    UpdateDR,
 	    CaptureIR,
 	    ShiftIR,
-	    UpdateIR
+	    UpdateIR,
+	    CaptureDR_neg,
+	    ShiftDR_neg,
+	    CaptureIR_neg,
+	    ShiftIR_neg
 	    );
    reg [4:0] 	  state,next;
    parameter
@@ -137,7 +141,18 @@ module fsm (
 	ShiftIR=(state === 11) ? 1:0;
 	UpdateIR=(state === 15) ? 1:0;
      end
- 
+
+   //pushing out enable signals at the negedge of TCLK// 
+   always @(negedge TCLK)
+     begin
+	CaptureDR_neg<=CaptureDR;
+	ShiftDR_neg<=ShiftDR;
+	CaptureIR_neg<=CaptureIR;
+	ShiftIR_neg<=ShiftIR;	
+     end
+   
+
+   
 // for all output signals check, it is guaranteed by the fms that only one state will be 1, others are 0
 
   // ?? what about the reset signal ?? 

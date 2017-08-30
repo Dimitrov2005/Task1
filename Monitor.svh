@@ -19,8 +19,7 @@ class Monitor extends uvm_monitor;
 	   Transaction tr; 
 	   @(posedge viface.TCLK) 
 	     tr=Transaction::type_id::create("tr");
-	   tr.TMS=viface.TMS;
-	   tr.WSI=viface.WSI;
+	 //  tr.WSI=viface.WSI;
 	   tr.WSO=viface.WSO;
 	   aportMon.write(tr);
 	   end
