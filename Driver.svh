@@ -13,17 +13,18 @@ class Driver extends uvm_driver #(Transaction);
    endfunction // build_phase
 
    task run_phase(uvm_phase phase);
-       Transaction tr;
+       Transaction tr;	
+      @(negedge viface.TCLK) viface.TMS<=1;//TLR->IDLE
+      @(negedge viface.TCLK)	viface.TMS<=0;
       forever
 	begin
 	   wait (viface.TRESETN)
 	     seq_item_port.get_next_item(tr);
+
 	   //+++++++++++++ SHIFT INTO IR THE ADDRESS OF 1-ST TDR++++++++++++++++++++ //
 	   if(tr.ADDR == 8'h45)  
 	     begin
 		$display(" addr %h",tr.ADDR);
-		@(negedge viface.TCLK) viface.TMS<=1;
-		@(negedge viface.TCLK)	viface.TMS<=0;
 		@(negedge viface.TCLK)	viface.TMS<=1;
 		@(negedge viface.TCLK)	viface.TMS<=1;
 		@(negedge viface.TCLK)	viface.TMS<=0;
@@ -48,9 +49,11 @@ class Driver extends uvm_driver #(Transaction);
 		       viface.TMS<=0;
 		       @(negedge viface.TCLK)
 			 viface.WSI<=tr.WSI[i];
+		       $display("%b",tr.WSO);
 		    end
 		viface.TMS<=1;
 		@(negedge viface.TCLK) viface.TMS<=1;
+		@(negedge viface.TCLK) viface.TMS<=0;
 		$display("%b",tr.WSI[16:0]);
 		// -------------------- SHIFT DATA INTO 1-ST TDR -------------------- //
 	     end // if (tr.ADDR == 8'h45)
@@ -60,8 +63,7 @@ class Driver extends uvm_driver #(Transaction);
 	   else if (tr.ADDR==8'h77)
 	     begin 
 		$display(" addr %h",tr.ADDR);
-		@(negedge viface.TCLK) viface.TMS<=1;
-		@(negedge viface.TCLK)	viface.TMS<=0;
+
 		@(negedge viface.TCLK)	viface.TMS<=1;
 		@(negedge viface.TCLK)	viface.TMS<=1;
 		@(negedge viface.TCLK)	viface.TMS<=0;
@@ -87,10 +89,13 @@ class Driver extends uvm_driver #(Transaction);
 		       viface.TMS<=0;
 		       @(negedge viface.TCLK)
 			 viface.WSI<=tr.WSI[i];
+		       $display("%b",tr.WSO);
 		    end
 		viface.TMS<=1;
 		@(negedge viface.TCLK) viface.TMS<=1;
-		$display("%b",tr.WSI[16:0]);
+		@(negedge viface.TCLK) viface.TMS<=0;
+		$display("%b",tr.WSI[32:0]);
+		
 		// -------------------- SHIFT DATA INTO 2-nd TDR -------------------- //
 	     end // if (tr.ADDR==8'h77)
 	   

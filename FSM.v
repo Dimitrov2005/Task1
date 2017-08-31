@@ -45,7 +45,7 @@ module fsm (
 
    always @(TMS or state)
      begin
-	next=TLR;
+	next=IDLE;
 	case (state)
 	  
 //---------- DATA BRANCH-----------//
@@ -128,7 +128,7 @@ module fsm (
 	      next=SelectDR;
 	    else next=IDLE;
 
-	  default: state=TLR;
+	  default: state=IDLE;
 	endcase // case (state)
      end // always @ (TMS or state)
    
