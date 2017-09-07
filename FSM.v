@@ -16,7 +16,7 @@ module fsm (
 	    CaptureIR_neg,
 	    ShiftIR_neg
 	    );
-   reg [4:0] 	  state,next;
+   reg [3:0] 	  state,next;
    parameter
      TLR=0, // TLR
        IDLE=1,       // RT/IDLE

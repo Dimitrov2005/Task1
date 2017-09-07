@@ -31,7 +31,7 @@ module TDRRW (input
      else 
        parallelReg<=parallelReg;
    
-   assign SO=serialReg[SIZE-1];
+   assign SO=serialReg[0];
    
 endmodule
 

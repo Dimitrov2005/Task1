@@ -3,8 +3,9 @@ class Sequence extends uvm_sequence#(Transaction);
      // addr1=8'h45,17bit size RW
      // addr2=8'h77;33 bit size R
       
-int num=1;
-      
+     int num=1;
+     bit WSI[];
+     bit [7:0] ADDR;
      Transaction tr; 
    
       function new(string name="");
@@ -15,14 +16,14 @@ int num=1;
 	 repeat(num)
 	   begin
 	      tr=new("tr");
-		 start_item(tr);
+	      start_item(tr);
+	      begin
+	      tr.WSI=WSI;
+	      tr.ADDR=ADDR;
+	      end
 	      
-	      assert(tr.randomize() with {tr.ADDR dist {8'h45:/50,
-							8'h77:/50};
-					  })
-                 else `uvm_fatal("FE","Fatal Error During Randomization");
-		 finish_item(tr);
-	       
+	      finish_item(tr);
+	      
 	   end
       endtask // body
    endclass // Sequence

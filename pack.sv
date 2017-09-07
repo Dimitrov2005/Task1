@@ -1,5 +1,6 @@
 package pack_all ;
    import uvm_pkg::*;
+   import def_pkg::*;
 `include "uvm_macros.svh"
 `include "Transaction.svh"
 `include "Sequencer.svh"

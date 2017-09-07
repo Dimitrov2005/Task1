@@ -6,6 +6,7 @@ class Agent extends uvm_agent;
    Monitor mon;
    Sequencer seq;
    uvm_analysis_port#(Transaction)aportAgnt;
+ 
 
    function new(string name, uvm_component parent);
       super.new(name,parent);
@@ -24,7 +25,7 @@ class Agent extends uvm_agent;
         
      drv=Driver::type_id::create("drv",this);//build others with factory
      seq=Sequencer::type_id::create("seq",this);
-     mon=Monitor::type_id::create("mon",this);
+      mon=Monitor::type_id::create("mon",this);
    endfunction // build_phase
 
    function void connect_phase(uvm_phase phase);

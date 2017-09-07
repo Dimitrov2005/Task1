@@ -32,7 +32,7 @@ module IR(input
        parallelReg<=parallelReg;
 
    
-   assign SO=serialReg[7];
+   assign SO=serialReg[0];
    assign PO=parallelReg;
    
    
