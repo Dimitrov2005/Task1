@@ -1,0 +1,7 @@
+module scan(
+	    input
+	    output
+	    );
+   wire
+       
+endmodule // scan
