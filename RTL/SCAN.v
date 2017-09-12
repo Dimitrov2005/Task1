@@ -1,6 +1,7 @@
 module scan(
 	    input
-	    CTI,
+	    CTII,
+	    CTIO,
 	    CFI1,
 	    CFI2,
 	    CFI3,
@@ -23,7 +24,8 @@ module scan(
 	    CFO1,
 	    CFO2,
 	    CFO3,
-	    CTO
+	    CTOI,
+	    CTOO
 	    );
    
  
@@ -46,7 +48,7 @@ module scan(
 		       .wrp_of(1'b0),// also ? 
 		       .inscanwrap_sel(inscanwrap_sel),//select between JTAG or SCAN mode? 
 		       .CFI(core_phy_func_in1),
-		       .CTI(CTI),
+		       .CTI(CTII),
 		       .CTO(incellt1_incellt2),
 		       .CFO(phy_func_in1_core)
 		       );
@@ -85,7 +87,7 @@ module scan(
 			   .inscanwrap_sel(inscanwrap_sel),//select between JTAG or SCAN mode? 
 			   .CFI(core_phy_func_in3),
 			   .CTI(incellt2_incellt3),
-			   .CTO(CTO),
+			   .CTO(CTOI),
 			   .CFO(phy_func_in3_core)
 			   );
    
@@ -103,7 +105,7 @@ module scan(
 			   .wrp_of(1'b0),// also ? 
 			   .inscanwrap_sel(outscanwrap_sel),//select between JTAG or SCAN mode? 
 			   .CFI(CFO1), // output from phy to scanwrap
-			   .CTI(CTO),
+			   .CTI(CTOI),
 			   .CTO(outcellt1_outcellt2),
 			   .CFO(CFI1)// otput from scanwrap to core
 			   );
@@ -121,10 +123,10 @@ module scan(
 			   .wrp_if(1'b0),//what for ?
 			   .wrp_of(1'b0),// also ? 
 			   .inscanwrap_sel(outscanwrap_sel),//select between JTAG or SCAN mode? 
-			   .CFI(CFO2),
+			   .CFI(CFO2),//output from phy
 			   .CTI(outcellt1_outcellt2),
 			   .CTO(outcellt2_outcellt3),
-			   .CFO(CFI2)
+			   .CFO(CFI2)//output to core
 			   );
    
    inscanwrap outcell3( .TDR_CAPTURE(TDR_CAPTURE),
@@ -142,7 +144,7 @@ module scan(
 			   .inscanwrap_sel(outscanwrap_sel),//from IR 
 			   .CFI(CFO3),
 			   .CTI(outcellt2_outcellt3),
-			   .CTO(CTO),
+			   .CTO(CTOO),
 			   .CFO(CFI3)
 			   );
    

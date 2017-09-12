@@ -1,4 +1,4 @@
-module STAC (
+module fsm (
 	    input
 	    TMS,
 	    TDI,

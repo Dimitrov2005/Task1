@@ -6,13 +6,18 @@
 +incdir+/home/SIBIZAPPS/sdimitrov/Projects/STACSCAN
 
 
-../FSM.v
-../TDRR.v
-../TDRRW.v
-../IR.v
-../DEC.v
-../MUX.v
-../STAC.v
+../RTL/STAC.v
+../RTL/TDRR.v
+../RTL/TDRRW.v
+../RTL/IR.v
+../RTL/DEC.v
+../RTL/MUX.v
+../mux2to1.v
+../ClkGater.v
+../inscanwrap.v
+../phy.v
+../RTL/SCAN.v
+../RTL/DFTG.v
 
 
 ../interface.sv

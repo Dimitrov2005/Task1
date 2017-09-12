@@ -7,8 +7,7 @@ module TDRRW (input
 	   TCLK,          
 	   SI, //Serial input   
 	   output reg
-	   SO,           //serial output
-	   [7:0]  PO
+	   SO           //serial output
 	   );
    
    parameter SIZE=17;
@@ -33,7 +32,6 @@ module TDRRW (input
        parallelReg<=parallelReg;
    
    assign SO=serialReg[0];
-   assign PO=parallelReg;
    
 endmodule
 

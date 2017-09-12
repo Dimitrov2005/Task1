@@ -13,7 +13,7 @@ module mux(input
 	  8'h45:WSO=SO1;
 	  8'h77:WSO=SO2;
 	  8'h54:WSO=SO3;
-	  8'h55:WSO=SO4;
+	  8'h55;WSO=SO4;
 	  default :WSO=1'bx; //other instructions drive x
 	endcase
      end

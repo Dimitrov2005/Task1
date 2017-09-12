@@ -1,4 +1,4 @@
-module mux(
+module mux21(
 	   input
 	   select,
 	   in0,

@@ -7,7 +7,7 @@ module mux(
 	   out
 	   );
    
-   always @(select or in)
+   always @(select or in1 or in0)
      case(select)
        1'b1 : out=in0;
        1'b0 : out=in1;

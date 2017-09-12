@@ -7,7 +7,7 @@ module top;
    iface iface1(TCLK,TRESETN);
    virtual iface viface=iface1;
 
-   STAC stc(.TMS(iface.TMS),
+   DFTG gasket(.TMS(iface.TMS),
 	    .TCLK(iface.TCLK),
 	    .TRESETN(iface.TRESETN),
 	    .WSI(iface.WSI),
