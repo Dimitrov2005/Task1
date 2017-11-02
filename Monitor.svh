@@ -8,10 +8,10 @@ class Monitor extends uvm_monitor;
    bit oldWSI[]; // STC in prev
    bit [7:0] aq[$]; // address queue
    bit [7:0] temp[$];
-   bit [7:0] addr_tdr;
-   bit  DEFTDR[];
-   bit  CAPTDR[];
-   bit 	      RO;
+	bit [7:0] addr_tdr; // tdr addres
+	bit  DEFTDR[]; // Default TDR value 
+	bit  CAPTDR[]; //captured DR
+   bit 	      RO;//read only
   // bit [1:0]    addr_def[];
    bit [3:0] state=TLR;
    bit [3:0] next=TLR;
